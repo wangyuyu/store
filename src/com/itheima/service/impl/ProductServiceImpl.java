@@ -37,9 +37,9 @@ public class ProductServiceImpl implements ProductService{
 	 */
 	@Override
 	public Product getByPid(String pid) throws Exception {
-		
+		//执行dao层
 		ProductDao pdao = (ProductDao) BeanFactory.getBean("ProductDao");
-
+		
 		return pdao.getByPid(pid);
 	}
 	

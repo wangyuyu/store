@@ -14,7 +14,7 @@ import com.itheima.utils.BeanFactory;
 import com.itheima.utils.JsonUtil;
 
 /**
- * Servlet implementation class CategoryServlet
+ * 关于首页分类的servlet
  */
 public class CategoryServlet extends BaseServlet {
 	

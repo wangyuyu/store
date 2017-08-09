@@ -21,7 +21,6 @@ public class ProductDaoImpl implements ProductDao{
 	@Override
 	public List<Product> findNew() throws Exception {
 		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
-//		String sql = "select * from product order by pdate limit 9";
 		String sql = "select * from product order by pdate desc limit 9";
 
 		
@@ -49,7 +48,6 @@ public class ProductDaoImpl implements ProductDao{
 		String sql = "select * from product where pid = ? limit 1";
 		
 		
-//		return qr.query(sql, new BeanHandler<>(Product.class),pid);
 		return qr.query(sql, new BeanHandler<>(Product.class), pid);
 
 	}
