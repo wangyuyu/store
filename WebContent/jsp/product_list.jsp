@@ -120,7 +120,6 @@
 				<ul style="list-style: none;">
 					<%
 						//获取指定名称的cookie ids
-						
 						Cookie c = CookUtils.getCookieByName("ids", request.getCookies());
 						//判断ids是否为空
 						if(c == null) {
@@ -131,18 +130,7 @@
 							String[] arr = c.getValue().split("-");
 							for(String id : arr) {
 								System.out.println("pimage------" + id);
-								/* int temp = 0;
-								//做个数组的判断 小于10的前面+0 例：1---01；
-								try {
-									temp = Integer.parseInt(id);
-								} catch (NumberFormatException e) {
-								    e.printStackTrace();
-								}
-								
-								if(temp < 10) {
-									id = "0" + id; 	
-								} */
-								
+
 								%>
 								<li style="width: 150px;height: 216;float: left;margin: 0 8px 0 0;padding: 0 18px 15px;text-align: center;"><img src="<%=id %>" width="130px" height="130px" /></li>
 								<%
