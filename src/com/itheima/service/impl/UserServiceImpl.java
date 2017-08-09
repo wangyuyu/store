@@ -1,9 +1,11 @@
 package com.itheima.service.impl;
 
+import com.itheima.dao.CategoryDao;
 import com.itheima.dao.UserDao;
 import com.itheima.dao.impl.UserDaoImpl;
 import com.itheima.domain.User;
 import com.itheima.service.UserService;
+import com.itheima.utils.BeanFactory;
 import com.itheima.utils.MailUtils;
 
 public class UserServiceImpl implements UserService{
@@ -14,7 +16,8 @@ public class UserServiceImpl implements UserService{
 	 */
 	public void regist(User user) throws Exception {
 		// TODO Auto-generated method stub
-		UserDao dao = new UserDaoImpl();
+		UserDao dao = (UserDao) BeanFactory.getBean("UserDao");
+
 		dao.add(user);
 		/* 暂不实现 ********************************
 		// 发送邮件
@@ -34,8 +37,8 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User active(String code) throws Exception {
 		// TODO Auto-generated method stub
-		UserDao dao = new UserDaoImpl();
-		
+		UserDao dao = (UserDao) BeanFactory.getBean("UserDao");
+
 		//通过一个code获取一个用户
 		User user = dao.getByCode(code);
 		//判断用户是否为空
@@ -53,7 +56,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User login(String usernane, String password) throws Exception {
 		// TODO 用户登陆
-		UserDao dao = new UserDaoImpl();
+		UserDao dao = (UserDao) BeanFactory.getBean("UserDao");
 		return dao.getByUsernameAndPwd(usernane,password	);
 
 	}

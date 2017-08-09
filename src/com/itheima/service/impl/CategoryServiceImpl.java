@@ -7,6 +7,8 @@ import com.itheima.dao.CategoryDao;
 import com.itheima.dao.impl.CategoryDaoImpl;
 import com.itheima.domain.Category;
 import com.itheima.service.CategoryService;
+import com.itheima.service.ProductService;
+import com.itheima.utils.BeanFactory;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
@@ -33,7 +35,8 @@ public class CategoryServiceImpl implements CategoryService{
 		// 4.判断数据是否为空
 		if (elemet == null) {
 			//从数据库中获取
-			CategoryDao cd = new CategoryDaoImpl();
+			CategoryDao cd = (CategoryDao) BeanFactory.getBean("CategoryDao");
+
 			list = cd.findAll();
 			//将list放入缓存
 			cache.put(new Element("clist", list));

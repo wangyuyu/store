@@ -13,8 +13,10 @@ import org.apache.commons.beanutils.ConvertUtils;
 import com.itheima.constant.Constant;
 import com.itheima.domain.User;
 import com.itheima.myconvernter.MyConventer;
+import com.itheima.service.ProductService;
 import com.itheima.service.UserService;
 import com.itheima.service.impl.UserServiceImpl;
+import com.itheima.utils.BeanFactory;
 import com.itheima.utils.MD5Utils;
 import com.itheima.utils.UUIDUtils;
 
@@ -63,7 +65,8 @@ public class UserServlet extends BaseServlet {
 		user.setPassword(MD5Utils.md5(user.getPassword()));
 		
 		//2.调用service完成注册
-		UserService s = new UserServiceImpl();
+		UserService s = (UserService) BeanFactory.getBean("UserService");
+
 		s.regist(user);
 		
 		//3.页面请求转发
@@ -82,7 +85,8 @@ public class UserServlet extends BaseServlet {
 		//获取激活码
 		String code = request.getParameter("code");
 		//调用service 完成激活
-		UserService s = new UserServiceImpl();
+		UserService s = (UserService) BeanFactory.getBean("UserService");
+
 		User user = s.active(code);
 		
 		if (user == null) {
@@ -121,7 +125,8 @@ public class UserServlet extends BaseServlet {
 		password = MD5Utils.md5(password);
 		
 		//调用service完成登陆操作 返回user
-		UserService s = new UserServiceImpl();
+		UserService s = (UserService) BeanFactory.getBean("UserService");
+
 		User user = s.login(usernane,password);
 		
 		//判断用户

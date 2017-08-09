@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.itheima.domain.PageBean;
 import com.itheima.domain.Product;
+import com.itheima.service.CategoryService;
 import com.itheima.service.ProductService;
 import com.itheima.service.impl.ProductServiceImpl;
+import com.itheima.utils.BeanFactory;
 
 /**
  * 商品servlet
@@ -26,7 +28,8 @@ public class ProductServlet extends BaseServlet {
 		String pid = request.getParameter("pid");
 		
 		//2.调用service
-		ProductService ps = new ProductServiceImpl();
+		ProductService ps = (ProductService) BeanFactory.getBean("ProductService");
+
 		Product p = ps.getByPid(pid);
 		
 		//3.将结果放入request中 请求转发
@@ -47,7 +50,8 @@ public class ProductServlet extends BaseServlet {
 		
 		
 		//2.调用service 返回值pageBean
-		ProductService ps = new ProductServiceImpl();
+		ProductService ps = (ProductService) BeanFactory.getBean("ProductService");
+
 		PageBean<Product> bean = ps.findByPage(currPage,pageSize,cid);
 		
 		System.out.println("list-----" + bean.getList().size());
