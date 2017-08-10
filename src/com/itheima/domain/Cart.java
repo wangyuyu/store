@@ -42,7 +42,6 @@ public class Cart implements Serializable{
 		} else {
 			//无 将购物车项 添加进去
 			map.put(pid, item);
-			
 		}
 		//添加之后修改金额
 		total += item.getSubtotal();
