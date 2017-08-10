@@ -154,8 +154,13 @@ public class ProductServlet extends BaseServlet {
 		response.addCookie(c);
 		
 		findByPage(request, response);
-
-		return "/jsp/product_list.jsp";
+		
+		//重定向
+		String cid = request.getParameter("cid");
+		int currPage = Integer.parseInt(request.getParameter("currPage"));
+		response.sendRedirect(request.getContextPath() + "/product?method=findByPage&cid=" + cid + "&currPage=" + currPage);
+		
+		return null;
 	}
 	
 }
