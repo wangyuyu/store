@@ -84,26 +84,28 @@
 
 			<div>
 				<hr/>
-				<form class="form-horizontal" style="margin-top:5px;margin-left:150px;">
+				<form id="orderForm" class="form-horizontal" style="margin-top:5px;margin-left:150px;" action="${pageContext.request.contextPath }/order?method=pay"method="post">
+					<input type="hidden" name="oid" value="${bean.oid }">
+					
 					<div class="form-group">
 						<label for="username" class="col-sm-1 control-label">地址</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="username" placeholder="请输入收货地址">
+							<input type="text" class="form-control" id="username" name="address" placeholder="请输入收货地址" value="${bean.address }">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputPassword3" class="col-sm-1 control-label">收货人</label>
+						<label for="inputPassword3" class="col-sm-1 control-label" >收货人</label>
 						<div class="col-sm-5">
-							<input type="password" class="form-control" id="inputPassword3" placeholder="请输收货人">
+							<input type="text" name="name" class="form-control" id="inputPassword3" placeholder="请输收货人" value="${bean.name }">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="confirmpwd" class="col-sm-1 control-label">电话</label>
 						<div class="col-sm-5">
-							<input type="password" class="form-control" id="confirmpwd" placeholder="请输入联系方式">
+							<input type="text" name="telephone" class="form-control" id="confirmpwd" placeholder="请输入联系方式" value="${bean.telephone }">
 						</div>
 					</div>
-				</form>
+				
 
 				<hr/>
 
@@ -130,8 +132,10 @@
 						<input type="radio" name="pd_FrpId" value="CEB-NET-B2C" />光大银行
 						<img src="${pageContext.request.contextPath}/bank_img/guangda.bmp" align="middle" />&nbsp;&nbsp;&nbsp;&nbsp;
 						<input type="radio" name="pd_FrpId" value="CMBCHINA-NET-B2C" />招商银行
-						<img src="${pageContext.request.contextPath}/bank_img/cmb.bmp" align="middle" />
-
+						<img src="${pageContext.request.contextPath}/bank_img/cmb.bmp" align="middle" />&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="pd_FrpId" value="ECITIC-NET-B2C" />中信银行
+						<img src="${pageContext.request.contextPath}/bank_img/zx.bmp" align="middle" />
+						
 					</p>
 					<hr/>
 					<p style="text-align:right;margin-right:100px;">
@@ -140,7 +144,7 @@
 						</a>
 					</p>
 					<hr/>
-
+				</form>
 				</div>
 			</div>
 

@@ -3,11 +3,13 @@ package com.itheima.domain;
 import java.util.List;
 
 public class PageBean<E> {
+	
 	private List<E> list;
 	private Integer currPage;
 	private Integer pageSize;
 	private Integer totalPage;
 	private Integer totalCount;
+	
 	public List<E> getList() {
 		return list;
 	}

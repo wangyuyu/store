@@ -2,6 +2,16 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>store</display-name>
   <filter>
+    <filter-name>PrivilegeFilter</filter-name>
+    <filter-class>com.itheima.web.filter.PrivilegeFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>PrivilegeFilter</filter-name>
+    <servlet-name>/order</servlet-name>
+    <url-pattern>/jsp.order_info.jsp</url-pattern>
+    <url-pattern>/jsp.order_list.jsp</url-pattern>
+  </filter-mapping>
+  <filter>
     <filter-name>EncodingFilter</filter-name>
     <filter-class>com.itheima.web.filter.EncodingFilter</filter-class>
   </filter>
@@ -86,5 +96,15 @@
   <servlet-mapping>
     <servlet-name>OrdeServlet</servlet-name>
     <url-pattern>/order</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminCategoryServlet</display-name>
+    <servlet-name>AdminCategoryServlet</servlet-name>
+    <servlet-class>com.itheima.web.servlet.AdminCategoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminCategoryServlet</servlet-name>
+    <url-pattern>/adminCategory</url-pattern>
   </servlet-mapping>
 </web-app>
