@@ -59,6 +59,18 @@ public class CategoryDaoImpl implements CategoryDao{
 		qr.update(sql,c.getCname(),c.getCid());
 	}
 
+	/**
+	 * 删除分类
+	 */
+	@Override
+	public void delete(String cid) throws Exception {
+		QueryRunner qr = new QueryRunner();
+		System.out.println("cid-------" + cid);
+		String sql="delete from category where cid = ?";
+		qr.update(DataSourceUtils.getConnection(), sql, cid);
+		
+	}
+
 }
 
 

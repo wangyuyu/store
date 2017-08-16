@@ -114,16 +114,16 @@ public class AdminCategoryServlet extends BaseServlet {
 	 */
 	 public String delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		 
-		 //获取cid
-		 String cid = request.getParameter("cid");
-		 
-		 //调用service
-		 CategoryService cs = (CategoryService) BeanFactory.getBean("CategoryService");
-		 cs.delete(cid);
-		 
-		 //重定向
-		 response.sendRedirect(request.getContextPath()+"/adminCategory?method=findAll");
-		 
+		 //1.获取cid
+		String cid = request.getParameter("cid");
+		
+		//2.调用service 完成删除
+		CategoryService cs=(CategoryService) BeanFactory.getBean("CategoryService");
+		cs.delete(cid);
+		
+		//3.重定向
+		response.sendRedirect(request.getContextPath()+"/adminCategory?method=findAll");
+		
 		 return null;
 	} 
 	 

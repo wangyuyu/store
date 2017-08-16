@@ -57,5 +57,21 @@ public class ProductServiceImpl implements ProductService{
 		
 		return new PageBean<>(list, currPage, pageSize, totalCount);
 	}
+	
+	/**
+	 * 查询所有商品
+	 */
+	@Override
+	public List<Product> findAll() throws Exception {
+		ProductDao pd = (ProductDao) BeanFactory.getBean("ProductDao");
+		
+		return pd.findAll();
+	}
+	
+	@Override
+	public void add(Product p) throws Exception {
+		ProductDao pdao=(ProductDao) BeanFactory.getBean("ProductDao");
+		pdao.add(p);
+	}
 
 }

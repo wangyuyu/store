@@ -63,12 +63,23 @@ public class OrderServiceimpl implements OrderService{
 		return od.getById(oid);
 	}
 
-
+	/**
+	 * 更新订单状态
+	 */
 	@Override
 	public void update(Order order) throws Exception {
 		//查询dao
 		OrderDao od =  (OrderDao) BeanFactory.getBean("OrderDao");
 		od.update(order);
+	}
+
+	/**
+	 * 根据状态查询所有订单
+	 */
+	@Override
+	public List<Order> findAllByState(String state) throws Exception {
+		OrderDao od=(OrderDao) BeanFactory.getBean("OrderDao");
+		return od.findAllByState(state);
 	}
 	
 }

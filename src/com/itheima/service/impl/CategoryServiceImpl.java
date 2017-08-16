@@ -1,14 +1,17 @@
 package com.itheima.service.impl;
 
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.itheima.dao.CategoryDao;
+import com.itheima.dao.ProductDao;
 import com.itheima.dao.impl.CategoryDaoImpl;
 import com.itheima.domain.Category;
 import com.itheima.service.CategoryService;
 import com.itheima.service.ProductService;
 import com.itheima.utils.BeanFactory;
+import com.itheima.utils.DataSourceUtils;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
@@ -101,10 +104,34 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public void delete(String cid) throws Exception {
-		// TODO Auto-generated method stub
+	public void delete(String cid) throws Exception{ 
 		
-	} 
+		try {
+			//1.开启事务
+			DataSourceUtils.startTransaction();
+
+			//2.更新商品
+			ProductDao pd=(ProductDao) BeanFactory.getBean("ProductDao");
+			pd.updateCid(cid);
+			
+			//3.删除分类
+			CategoryDao cd=(CategoryDao) BeanFactory.getBean("CategoryDao");
+			cd.delete(cid);
+			
+			//4.事务控制
+			DataSourceUtils.commitAndClose();
+			
+			//5.清空缓存
+			CacheManager cm = CacheManager.create(CategoryServiceImpl.class.getClassLoader().getResourceAsStream("ehcache.xml"));
+			Cache cache = cm.getCache("categoryCache");
+			cache.remove("clist");
+		} catch (Exception e) {
+			e.printStackTrace();
+			DataSourceUtils.rollbackAndClose();
+			throw e;
+		}
+		
+	}
 	
 //	public static void main(String[] args) {
 //		InputStream is = CategoryServiceImpl.class.getClassLoader().getResourceAsStream("ehcache.xml");

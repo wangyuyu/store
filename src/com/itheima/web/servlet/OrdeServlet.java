@@ -278,6 +278,37 @@ public class OrdeServlet extends BaseServlet {
 		
 	}
 	
+	/**
+	 * 确认收货
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateState(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		//获取oid
+		String oid = request.getParameter("oid");
+		
+		//调用service
+		OrderService os = (OrderService) BeanFactory.getBean("OrderService");
+		Order order = os.getById(oid);
+		order.setState(3);
+		os.update(order);
+		
+		response.sendRedirect(request.getContextPath() + "/order?method=findAllByPage&currPage=1");
+		
+		return null;
+		
+	}
 }
+
+
+
+
+
+
+
+
 
 

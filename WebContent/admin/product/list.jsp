@@ -8,7 +8,7 @@
 		<script language="javascript" src="${pageContext.request.contextPath}/js/public.js"></script>
 		<script type="text/javascript">
 			function addProduct(){
-				window.location.href = "${pageContext.request.contextPath}/adminProduct_addPage.action";
+				window.location.href = "${pageContext.request.contextPath}/adminProduct?method=addUI";
 			}
 		</script>
 	</HEAD>
@@ -25,7 +25,7 @@
 					<tr>
 						<td class="ta_01" align="right">
 							<button type="button" id="add" name="add" value="添加" class="button_add" onclick="addProduct()">
-&#28155;&#21152;
+添加商品
 </button>
 
 						</td>
@@ -57,7 +57,7 @@
 										编辑
 									</td>
 									<td width="7%" align="center">
-										删除
+										下架
 									</td>
 								</tr>
 								<c:forEach items="${list }" var="p" varStatus="vs">
@@ -73,7 +73,7 @@
 											</td>
 											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
 												width="17%">
-												${p.market_price }
+												${p.pname }
 											</td>
 											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
 												width="17%">

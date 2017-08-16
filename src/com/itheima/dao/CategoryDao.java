@@ -14,4 +14,6 @@ public interface CategoryDao {
 
 	void update(Category c) throws Exception;
 
+	void delete(String cid) throws Exception;
+
 }

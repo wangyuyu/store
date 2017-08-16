@@ -75,5 +75,39 @@ public class ProductDaoImpl implements ProductDao{
 
 		return  ((Long)qr.query(sql, new ScalarHandler(), cid)).intValue();
 	}
+	
+	/**
+	 * 更新商品的Cid 为删除分类的时候准备
+	 */
+	@Override
+	public void updateCid(String cid) throws Exception {
+		QueryRunner qr = new QueryRunner();
+		String sql = "update product set cid = null where cid = ?";
+
+		qr.update(DataSourceUtils.getConnection(),sql,cid);
+	}
+	
+	/**
+	 * 查询所有商品
+	 */
+	@Override
+	public List<Product> findAll() throws Exception {
+		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "select * from product";
+		
+		return qr.query(sql, new BeanListHandler<>(Product.class));
+	}
+
+	/**
+	 * 添加一个商品
+	 */
+	@Override
+	public void add(Product p) throws Exception {
+		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "insert into product values(?,?,?,?,?,?,?,?,?,?)";
+		qr.update(sql, p.getPid(),p.getPname(),p.getMarket_price(),
+				p.getShop_price(),p.getPimage(),p.getPdate(),
+				p.getIs_hot(),p.getPdesc(),p.getPflag(),p.getCategory().getCid());
+	}
 
 }
